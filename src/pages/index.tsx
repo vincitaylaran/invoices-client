@@ -1,5 +1,7 @@
-import * as React from "react"
-import { gql, useQuery } from "@apollo/client"
+import React from "react"
+import { useQuery, gql } from "@apollo/client"
+import "../globals.css"
+import { MarkAsPaidButton, NewInvoiceButton } from "../components/Button"
 
 const INVOICES_QUERY = gql`
   query {
@@ -10,7 +12,6 @@ const INVOICES_QUERY = gql`
   }
 `
 
-// markup
 const IndexPage = () => {
   const { data } = useQuery(INVOICES_QUERY)
 
@@ -18,10 +19,8 @@ const IndexPage = () => {
     <main>
       <title>Invoices</title>
       <h1>Invoices</h1>
-      {data &&
-        data.invoices.map((i: any, index: number) => (
-          <p key={index}>{i.clientName}</p>
-        ))}
+      <NewInvoiceButton />
+      <MarkAsPaidButton />
     </main>
   )
 }
